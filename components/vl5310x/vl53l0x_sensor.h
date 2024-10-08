@@ -8,7 +8,7 @@
 #include "esphome/components/i2c/i2c.h"
 
 namespace esphome {
-namespace vl53l0x_m {
+namespace vl53l0x {
 
 struct SequenceStepEnables {
   bool tcc, msrc, dss, pre_range, final_range;
