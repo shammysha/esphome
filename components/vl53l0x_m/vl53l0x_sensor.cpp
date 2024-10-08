@@ -268,8 +268,10 @@ void VL53L0XSensor::update() {
     Wire.end();
     delay(500);
     Wire.begin();
+
     this->setup();
 
+    return;
   }
 
   // initiate single shot measurement
