@@ -11,7 +11,7 @@ from esphome.const import (
 )
 from esphome import pins
 
-DEPENDENCIES = ["i2c"]
+DEPENDENCIES = ["i2c", "vl5310x"]
 
 vl53l0x_m_ns = cg.esphome_ns.namespace("vl53l0x_m")
 VL53L0XMSensor = vl53l0x_m_ns.class_(
