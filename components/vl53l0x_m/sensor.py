@@ -15,7 +15,7 @@ DEPENDENCIES = ["i2c"]
 
 vl53l0x_m_ns = cg.esphome_ns.namespace("vl53l0x_m")
 VL53L0XMSensor = vl53l0x_m_ns.class_(
-    "VL53L0XMSensor", sensor.vl5310x, cg.PollingComponent, i2c.I2CDevice
+    "VL53L0XMSensor", vl5310x, cg.PollingComponent, i2c.I2CDevice
 )
 
 CONFIG_SCHEMA = cv.All(
