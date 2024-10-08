@@ -1,6 +1,7 @@
 #include "vl53l0x_sensor.h"
 #include "esphome/core/log.h"
 #include "esphome/core/application.h"
+#include <Wire.h>
 
 /*
  * Most of the code in this integration is based on the VL53L0x library
