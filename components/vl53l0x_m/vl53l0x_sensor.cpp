@@ -265,8 +265,11 @@ void VL53L0XSensor::update() {
     // this->status_momentary_warning("update", 5000);
     ESP_LOGW(TAG, "%s - update called before prior reading complete - initiated:%d waiting_for_interrupt:%d. Restarting",
              this->name_.c_str(), this->initiated_read_, this->waiting_for_interrupt_);
-    delay(100);
-    App.safe_reboot();
+    Wire.end();
+    delay(500);
+    Wire.begin();
+    this->setup();
+
   }
 
   // initiate single shot measurement
