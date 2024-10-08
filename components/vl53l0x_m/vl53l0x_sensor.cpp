@@ -268,7 +268,7 @@ void VL53L0XSensor::update() {
     delayMicroseconds(100);
     this->enable_pin_->digital_write(true);
     this->waiting_for_interrupt_ = false;
-    delayMicroseconds(100);
+    return;
   }
 
   // initiate single shot measurement
