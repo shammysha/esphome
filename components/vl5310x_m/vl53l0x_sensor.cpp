@@ -11,9 +11,9 @@
  */
 
 namespace esphome {
-namespace vl53l0x {
+namespace vl53l0x_m {
 
-static const char *const TAG = "vl53l0x";
+static const char *const TAG = "vl53l0x_m";
 
 std::list<VL53L0XSensor *> VL53L0XSensor::vl53_sensors;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 bool VL53L0XSensor::enable_pin_setup_complete = false;   // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
