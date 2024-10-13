@@ -1,7 +1,7 @@
 #include "vl53l0x_sensor.h"
 #include "esphome/core/log.h"
 #include "esphome/core/application.h"
-#include <Wire.h>
+
 
 /*
  * Most of the code in this integration is based on the VL53L0x library
@@ -266,7 +266,8 @@ void VL53L0XSensor::update() {
     this->status_momentary_warning("update", 1000);
     ESP_LOGW(TAG, "%s - update called before prior reading complete - initiated:%d waiting_for_interrupt:%d. Restarting",
              this->name_.c_str(), this->initiated_read_, this->waiting_for_interrupt_);
-    return;
+    this->initiated_read_ = false;
+    this->waiting_for_interrupt_ = false;
   }
 
   // initiate single shot measurement
