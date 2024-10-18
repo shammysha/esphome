@@ -17,7 +17,7 @@ namespace nartis100 {
 
 #define CLIENT_ADDRESS  0x20
 #define PHY_DEVICE      0x10
-#define LOGICAL_DEVICE  0x02
+#define LOGICAL_DEVICE  0x01
 #define FLAG            0x7E
 #define TYPE3           0x0A
 #define MAX_INFO_FIELD  0x80
