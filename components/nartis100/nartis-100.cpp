@@ -688,8 +688,14 @@ void Nartis100::update() {
     ESP_LOGV(TAG, "Time to Update");
     this->error_ = false; // reset error
     this->phase_ = 1;
-    meter.server_upper_addr = this->logical_address_;
-    meter.server_lower_addr = this->physical_address_;       
+    if (meter.server_upper_addr != this->logical_address_) {
+       meter.server_upper_addr = this->logical_address_;
+       ESP_LOGI(TAG, "Logical Address now is: %d", meter.server_upper_addr);
+    }
+    if (meter.server_lower_addr != this->physical_address_) {       
+       meter.server_lower_addr = this->physical_address_;       
+       ESP_LOGI(TAG, "Physical Address now is: %d", meter.server_lower_addr);         
+    }
   }
 }
 
