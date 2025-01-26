@@ -50,8 +50,8 @@ SCHEMA_ATTRS = {
     cv.GenerateID(): cv.declare_id(Nartis100),
     cv.Required(CONF_PASSWORD): cv.All(cv.string, cv.Length(min=3,max=8)),
     cv.Optional(CONF_DIR_PIN): pins.gpio_output_pin_schema,
-    cv.Optional(CONF_LOGICAL_ADDRESS, default=1): cv.integer,
-    cv.Optional(CONF_PHYSICAL_ADDRESS, default=16): cv.integer,
+    cv.Optional(CONF_LOGICAL_ADDRESS, default=1): cv.int,
+    cv.Optional(CONF_PHYSICAL_ADDRESS, default=16): cv.int,
     
     cv.Optional(CONF_STARTUP_DELAY, default="10s"): cv.positive_time_period_milliseconds,
     cv.Optional(CONF_CURRENT): sensor.sensor_schema(
