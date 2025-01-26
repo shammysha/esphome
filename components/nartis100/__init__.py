@@ -37,6 +37,9 @@ CONF_ENERGY = list(map(lambda x: "energy" + str(1 + x), range(0, MAX_TARIFF_COUN
 CONF_SERIAL_NUMBER = "serial_number"
 CONF_RELEASE_DATE = "release_date"
 CONF_ERROR = "error"
+CONF_LOGICAL_ADDRESS = "logical_address"
+CONF_PHYSICAL_ADDRESS = "physical_address"
+
 
 nartis100_ns = cg.esphome_ns.namespace("nartis100")
 Nartis100 = nartis100_ns.class_("Nartis100", cg.PollingComponent, uart.UARTDevice)
@@ -45,9 +48,11 @@ Nartis100ForceUpdateAction = nartis100_ns.class_("Nartis100ForceUpdateAction", a
 
 SCHEMA_ATTRS = {
     cv.GenerateID(): cv.declare_id(Nartis100),
-#    cv.Optional(CONF_PASSWORD, default="111"): cv.string,
     cv.Required(CONF_PASSWORD): cv.All(cv.string, cv.Length(min=3,max=8)),
     cv.Optional(CONF_DIR_PIN): pins.gpio_output_pin_schema,
+    cv.Optional(CONF_LOGICAL_ADDRESS, default=1): cv.integer,
+    cv.Optional(CONF_PHYSICAL_ADDRESS, default=16): cv.integer,
+    
     cv.Optional(CONF_STARTUP_DELAY, default="10s"): cv.positive_time_period_milliseconds,
     cv.Optional(CONF_CURRENT): sensor.sensor_schema(
         unit_of_measurement=UNIT_AMPERE,
