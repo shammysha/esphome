@@ -445,8 +445,8 @@ Nartis100::Nartis100(uart::UARTComponent *uart, const std::string &password) : u
 
   memset(&meter, 0, sizeof(meter_t));
   meter.client_addr = CLIENT_ADDRESS;
-  meter.server_upper_addr = LOGICAL_DEVICE;
-  meter.server_lower_addr = PHY_DEVICE;
+  meter.server_upper_addr = this->logical_address_;
+  meter.server_lower_addr = this->physical_address_;
   meter.max_info_field_rx = MAX_INFO_FIELD;
   meter.max_info_field_tx = MAX_INFO_FIELD;
   meter.window_rx = 1;
