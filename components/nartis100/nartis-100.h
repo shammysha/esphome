@@ -221,6 +221,8 @@ protected:
   std::vector<Command *> commands_;
 
 private:
+  std::string dump_result(result_package_t *package);
+
   uint32_t startup_delay_{0}, phase_{0};
   unsigned long sleep_time_{0}, wait_time_{0};
   uint8_t *rx_buffer_, *tx_buffer_;
