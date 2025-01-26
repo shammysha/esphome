@@ -710,7 +710,7 @@ std::string Nartis100::dump_result(result_package_t *package) {
     if (i > 0) {
       res += " ";
     }
-    sprintf(buf, "%02X", bytes[i]);
+    sprintf(buf, "%02X", *ptr++);
     res += buf;
   }
   return res;
