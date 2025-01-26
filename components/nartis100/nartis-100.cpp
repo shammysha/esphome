@@ -702,11 +702,11 @@ void Nartis100::update() {
 
 std::string Nartis100::dump_result(result_package_t *package) {
   std::string res;
-  size_t *len = package->size;
+  size_t len = package->size;
   uint8_t *ptr = package->buff;
   char buf[5];
      
-  for (size_t i = 0; i < *len; i++) {
+  for (size_t i = 0; i < len; i++) {
     if (i > 0) {
       res += " ";
     }
