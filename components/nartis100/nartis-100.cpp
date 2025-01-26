@@ -392,7 +392,7 @@ bool CommandGetSerialNumber::process_result(header_t *header, result_package_t *
   type_digit_t *unsigned32;
 /*  if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE && (unsigned32 = (type_digit_t*)(ptr + 4))->type == TYPE_UNSIGNED_32) { */
   if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0) {       
-    unsigned32 = (type_digit_t*)(ptr + 4))->type;
+    unsigned32 = (type_digit_t*)(ptr + 4);
     number = reverse32(unsigned32->value);
     return true;
   }
