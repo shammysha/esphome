@@ -204,6 +204,8 @@ public:
   void loop() override;
   void update() override;
   void set_startup_delay(uint32_t startup_delay) { this->startup_delay_ = startup_delay; }
+  void set_logical_address(uint16_t logical_address) { this->logical_address_ = logical_address; }
+  void set_physical_address(uint16_t physical_address) { this->physical_address_ = physical_address; }
   void set_dir_pin(GPIOPin *pin) { this->dir_pin_ = pin; }
   void set_current_sensor(sensor::Sensor *sensor) { this->sensor_current_ = sensor; }
   void set_voltage_sensor(sensor::Sensor *sensor) { this->sensor_voltage_ = sensor; }
@@ -232,6 +234,8 @@ private:
   sensor::Sensor *sensor_energy_[MAX_TARIFF_COUNT];
   text_sensor::TextSensor *sensor_serial_number_{nullptr}, *sensor_release_date_{nullptr};
   format_t format;
+  uint16_t logical_address_{0x01};
+  uint16_t physical_address_{0x10};
 };
 
 template <typename... Ts> class Nartis100ForceUpdateAction : public Action<Ts...> {
