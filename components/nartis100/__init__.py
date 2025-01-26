@@ -98,6 +98,8 @@ async def to_code(config):
     uart_component = await cg.get_variable(config[CONF_UART_ID])
     var = cg.new_Pvariable(config[CONF_ID], uart_component, config[CONF_PASSWORD])
     cg.add(var.set_startup_delay(config[CONF_STARTUP_DELAY]))
+    cg.add(var.set_logical_address(config[CONF_LOGICAL_ADDRESS]))
+    cg.add(var.set_physical_address(config[CONF_PHYSICAL_ADDRESS]))
     await cg.register_component(var, config)
 
     if dir_pin_config := config.get(CONF_DIR_PIN):
