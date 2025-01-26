@@ -354,12 +354,15 @@ bool CommandOpenSession::process_result(header_t *header, result_package_t *pack
   uint8_t *ptr = package->buff;
   uint8_t aare_len;
   if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && (*ptr++ == AARE) && (aare_len = *ptr) > 0)
-    for(uint8_t i = 0; i < aare_len; i++)
+    return true;
+     
+    for(uint8_t i = 0; i < aare_len; i++) {
       if (*ptr++ == 0xA2) {
         ptr += *ptr;
         if (*ptr == 0) /* open session successful */
           return true;
       }
+    }
   return false;
 }
 
