@@ -654,6 +654,7 @@ void Nartis100::loop() {
   } break;
 
   case 8: { // processing command
+    ESP_LOGV(TAG, "Processing bytes [%s]", Nartis100::dump_result(&this->result_package_));
     if (meter.format.segmentation) {
       ESP_LOGV(TAG, "Packet with segmentation for command [%s]. Sending notification command for next frame", this->commands_[cmd_idx]->get_name().c_str());
       memset(&this->tx_package_, 0, sizeof(this->tx_package_));
@@ -699,5 +700,20 @@ void Nartis100::update() {
   }
 }
 
+std::string Nartis100::dump_result(result_package_t *package) {
+  std::string res;
+  size_t *len = package->size;
+  uint8_t *ptr = package->buff;
+  char buf[5];
+     
+  for (size_t i = 0; i < *len; i++) {
+    if (i > 0) {
+      res += " ";
+    }
+    sprintf(buf, "%02X", bytes[i]);
+    res += buf;
+  }
+  return res;
+}
 } // namespace nartis100
 } // namespace esphome
