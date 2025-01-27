@@ -655,7 +655,7 @@ void Nartis100::loop() {
   } break;
 
   case 8: { // processing command
-    ESP_LOGV(TAG, "Processing bytes [%s]", Nartis100::dump_result(&this->result_package_).c_str());
+    ESP_LOGV(TAG, "Bytes to process: [%s]", Nartis100::dump_result(&this->result_package_).c_str());
     if (meter.format.segmentation) {
       ESP_LOGV(TAG, "Packet with segmentation for command [%s]. Sending notification command for next frame", this->commands_[cmd_idx]->get_name().c_str());
       memset(&this->tx_package_, 0, sizeof(this->tx_package_));
