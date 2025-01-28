@@ -383,9 +383,20 @@ int CommandDisconnect::fill_request(package_t *raw_package) {
 bool CommandGetSerialNumber::process_result(header_t *header, result_package_t *package) {
   uint8_t *ptr = package->buff;
   type_digit_t *unsigned32;
-  if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE && (unsigned32 = (type_digit_t*)(ptr + 4))->type == TYPE_UNSIGNED_32) { 
-    number = reverse32(unsigned32->value);
-    return true;
+  type_octet_string_t *o_str;
+  int i;  
+     
+  if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE) {
+     if ((unsigned32 = (type_digit_t*)(ptr + 4))->type == TYPE_UNSIGNED_32) {
+       number = reverse32(unsigned32->value);
+       return true;      
+     
+     } else if ((o_str = (type_octet_string_t*)(ptr + 4))->type == TYPE_OCTET_STRING && o_str->size > 0) {
+       for (i=0; i<o_str->size; i++) {
+         number += char((&o_str->str)[i]); 
+       }          
+       return true; 
+     }
   }
   return false;
 }
