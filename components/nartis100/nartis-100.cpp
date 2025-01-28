@@ -308,12 +308,13 @@ int CommandOpenSession::fill_request(package_t *raw_package) {
   info_field_data[info_field_len++] = 0x80;
   aarq_len++;
   auth_len++;
-  info_field_data[info_field_len++] = sizeof(meter.password);
+  info_field_data[info_field_len++] = meter.password_length;
   aarq_len++;
   auth_len++;
-  info_field_data[info_field_len++] = meter.password[0];
-  aarq_len++;
-  auth_len++;
+  memcpy(info_field_data+info_field_len, meter.password, meter.password_length);
+  info_field_len += meter.password_length;
+  aarq_len += meter.password_length;
+  auth_len += meter.password_length;
   info_field_data[info_field_len++] = meter.password[1];
   aarq_len++;
   auth_len++;
@@ -453,7 +454,8 @@ Nartis100::Nartis100(uart::UARTComponent *uart, const std::string &password) : u
   meter.window_rx = 1;
   meter.window_tx = 1;
   meter.format.type = TYPE3;
-  memcpy(&meter.password, password.c_str(), std::min(sizeof(meter.password), strlen(password.c_str())));
+  meter.password_length = std::min(sizeof(meter.password), strlen(password.c_str()));
+  memcpy(&meter.password, password.c_str(), meter.password_length);
   for (uint8_t i = 0; i < MAX_TARIFF_COUNT; i++)
     this->sensor_energy_[i] = nullptr;
 }
