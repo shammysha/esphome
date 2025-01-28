@@ -388,7 +388,7 @@ bool CommandGetSerialNumber::process_result(header_t *header, result_package_t *
      
   if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE) {
      if ((unsigned32 = (type_digit_t*)(ptr + 4))->type == TYPE_UNSIGNED_32) {
-       number = (std::string) reverse32(unsigned32->value);
+       number = std::to_string(reverse32(unsigned32->value));
        return true;      
      
      } else if ((o_str = (type_octet_string_t*)(ptr + 4))->type == TYPE_OCTET_STRING && o_str->size > 0) {
