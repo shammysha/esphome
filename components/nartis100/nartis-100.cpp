@@ -315,12 +315,6 @@ int CommandOpenSession::fill_request(package_t *raw_package) {
   info_field_len += meter.password_length;
   aarq_len += meter.password_length;
   auth_len += meter.password_length;
-  info_field_data[info_field_len++] = meter.password[1];
-  aarq_len++;
-  auth_len++;
-  info_field_data[info_field_len++] = meter.password[2];
-  aarq_len++;
-  auth_len++;
   info_field_data[auth_len_idx] = auth_len;
   memcpy(info_field_data + info_field_len, user_info, sizeof(user_info));
   info_field_len += sizeof(user_info);
