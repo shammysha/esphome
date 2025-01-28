@@ -171,7 +171,7 @@ public:
   int fill_request(package_t *package) override { return request_data(&attr_descriptor_serial_number, package); }
   bool process_result(header_t *header, result_package_t *package) override;
 private:
-  uint32_t number;
+  std::string number;
   std::function<void(const std::string &number)> on_value_;
 };
 
