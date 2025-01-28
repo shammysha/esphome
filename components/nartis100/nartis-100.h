@@ -79,7 +79,7 @@ typedef struct __attribute__((packed)) {
     uint8_t     client_addr;
     uint16_t    server_lower_addr;
     uint16_t    server_upper_addr;
-    uint8_t     password[8];
+    uint8_t     password[16];
     format_t    format;
     uint16_t    max_info_field_tx;
     uint16_t    max_info_field_rx;
