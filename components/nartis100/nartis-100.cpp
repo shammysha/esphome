@@ -308,7 +308,7 @@ int CommandOpenSession::fill_request(package_t *raw_package) {
   info_field_data[info_field_len++] = 0x80;
   aarq_len++;
   auth_len++;
-  info_field_data[info_field_len++] = 0x03;
+  info_field_data[info_field_len++] = sizeof(meter.password);
   aarq_len++;
   auth_len++;
   info_field_data[info_field_len++] = meter.password[0];
