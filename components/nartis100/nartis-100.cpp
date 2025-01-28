@@ -408,7 +408,7 @@ bool CommandGetReleaseDate::process_result(header_t *header, result_package_t *p
   char tmp[32];
   if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE && (o_str = (type_octet_string_t*)(ptr + 4))->type == TYPE_OCTET_STRING && o_str->size > 0) {
     uint8_t *ptr = &o_str->str;
-    snprintf(tmp, sizeof(tmp), "%X.%02d.%02d", (uint16_t)((*ptr++) << 8) + *ptr++, *ptr++, *ptr++);
+    snprintf(tmp, sizeof(tmp), "%02d.%02d.%X", *ptr++, *ptr++, (uint16_t)((*ptr++) << 8) + *ptr++);
     date = std::string(tmp);
     return true;
   }
