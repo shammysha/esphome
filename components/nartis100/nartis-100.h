@@ -80,6 +80,7 @@ typedef struct __attribute__((packed)) {
     uint16_t    server_lower_addr;
     uint16_t    server_upper_addr;
     uint8_t     password[16];
+    uint8_t     password_length;
     format_t    format;
     uint16_t    max_info_field_tx;
     uint16_t    max_info_field_rx;
