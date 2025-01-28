@@ -420,10 +420,21 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
   type_octet_string_t *present_date = (type_octet_string_t*)ptr;
   char date[32];
   if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE && (present_date = (type_octet_string_t*)(ptr + 8))->type == TYPE_OCTET_STRING && present_date->size > 0) {
-    ptr = &present_date->str;
-    snprintf(date, sizeof(date), "%d.%02d.%02d", (uint16_t)((*ptr++) << 8) + *ptr++, *ptr++, *ptr++);
-    ESP_LOGD(TAG, "Present date: %s", date);
-    type_digit_t *p_list = (type_digit_t*)((uint8_t*)&present_date->str + present_date->size);
+    if (present_date->size == 12) {
+      snprintf(date, sizeof(date), "%02d.%02d.%d, %02d:%02d:%02d", 
+        (&present_date->str)[3], (&present_date->str)[2], 
+        (uint16_t)((&present_date->str)[0] << 8) + (&present_date->str)[1],
+        (&present_date->str)[5], (&present_date->str)[6], (&present_date->str)[7]
+      );
+   } else {
+     snprintf(date, sizeof(date), "%02d.%02d.%d", 
+       (&present_date->str)[3], (&present_date->str)[2], 
+       (uint16_t)((&present_date->str)[0] << 8) + (&present_date->str)[1]
+     );
+   }    
+   ESP_LOGD(TAG, "Present date: %s", date);
+    
+   type_digit_t *p_list = (type_digit_t*)((uint8_t*)&present_date->str + present_date->size);
     // tariffs energy
     type_digit_t *tariff_A_p = p_list + 1;
     for (uint8_t i = 0; i < MAX_TARIFF_COUNT; i++) {
