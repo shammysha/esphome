@@ -421,8 +421,8 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
   // char date[32];
   if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE && (present_date = (type_octet_string_t*)(ptr + 8))->type == TYPE_OCTET_STRING && present_date->size > 0) {
     ptr = &present_date->str;
-    // snprintf(date, sizeof(date), "%d.%02d.%02d", (uint16_t)((*ptr++) << 8) + *ptr++, *ptr++, *ptr++);
-    // ESP_LOGD(TAG, "Present date: %s", date);
+    snprintf(date, sizeof(date), "%d.%02d.%02d", (uint16_t)((*ptr++) << 8) + *ptr++, *ptr++, *ptr++);
+    ESP_LOGD(TAG, "Present date: %s", date);
     type_digit_t *p_list = (type_digit_t*)((uint8_t*)&present_date->str + present_date->size);
     // tariffs energy
     type_digit_t *tariff_A_p = p_list + 1;
