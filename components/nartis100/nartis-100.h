@@ -167,7 +167,7 @@ public:
 
 class CommandGetSerialNumber : public Command {
 public:
-  CommandGetSerialNumber(std::function<void(const std::string&)> on_value) : Command("get_serial_number", true, true, 1, [this](uint8_t counter) {on_value_(std::to_string(number));}), on_value_(on_value) {}
+  CommandGetSerialNumber(std::function<void(const std::string&)> on_value) : Command("get_serial_number", true, true, 1, [this](uint8_t counter) {on_value_(number);}), on_value_(on_value) {}
   int fill_request(package_t *package) override { return request_data(&attr_descriptor_serial_number, package); }
   bool process_result(header_t *header, result_package_t *package) override;
 private:
