@@ -444,7 +444,7 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
      }    
      ESP_LOGD(TAG, "Present date: %s", date);
      ptr = (uint8_t*)&present_date->str + present_date->size;       
-     while (ptr < package->buff + sizeof(package->buff) && (metric = (type_digit_t*) ptr)) {
+     while (ptr < (package->buff + package->size) && (metric = (type_digit_t*) ptr)) {
        switch (metric->type) {
          case TYPE_UNSIGNED_32:
          case TYPE_SIGNED_32:
