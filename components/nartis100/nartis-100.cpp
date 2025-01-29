@@ -225,6 +225,15 @@ uint32_t Command::reverse32(uint32_t in) {
     return out;
 }
 
+uint16_t Command::reverse16(uint16_t in) {
+    uint16_t out;
+    uint8_t *source = (uint8_t*)&in;
+    uint8_t *destination = (uint8_t*)&out;
+    destination[1] = source[0];
+    destination[0] = source[1];
+    return out;
+}
+
 int CommandSNRM::fill_request(package_t *raw_package) {
   uint8_t *pkt_buff = (uint8_t*)raw_package;
   uint8_t *info_field_data = (uint8_t*) raw_package->data + 2;
