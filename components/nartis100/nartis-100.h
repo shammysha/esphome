@@ -35,9 +35,11 @@ namespace nartis100 {
 #define GET_RESPONSE    0xc4
 
 enum {
-    TYPE_SIGNED_32    = 0x05,
-    TYPE_UNSIGNED_32  = 0x06,
-    TYPE_OCTET_STRING = 0x09
+  TYPE_SIGNED_32      = 0x05,
+  TYPE_UNSIGNED_32    = 0x06,
+  TYPE_OCTET_STRING   = 0x09,
+  TYPE_SIGNED_LONG    = 0x10,
+  TYPE_UNSIGNED_LONG  = 0x12
 };
 
 typedef struct __attribute__((packed)) {
@@ -71,7 +73,7 @@ typedef struct __attribute__((packed)) {
 } type_octet_string_t;
 
 typedef struct __attribute__((packed)) {
-    uint8_t     type;                       /* 0x05 or 0x06 */
+    uint8_t     type;                       /* 0x05 | 0x06 | 0x10 | 0x12 */
     uint32_t    value;
 } type_digit_t; /* int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t */
 
