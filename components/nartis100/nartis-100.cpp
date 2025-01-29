@@ -436,37 +436,37 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
         (uint16_t)((&present_date->str)[0] << 8) + (&present_date->str)[1],
         (&present_date->str)[5], (&present_date->str)[6], (&present_date->str)[7]
       );
-   } else {
-     snprintf(date, sizeof(date), "%02d.%02d.%d", 
-       (&present_date->str)[3], (&present_date->str)[2], 
-       (uint16_t)((&present_date->str)[0] << 8) + (&present_date->str)[1]
-     );
-   }    
-   ESP_LOGD(TAG, "Present date: %s", date);
-   ptr = (uint8_t*)&present_date->str + present_date->size;       
-   while (ptr < package->buff + sizeof(package->buff) && (metric = (type_digit_t*) ptr)) {
-     switch (metric->type) {
-       case TYPE_UNSIGNED_32:
-       case TYPE_SIGNED_32:
-         sprintf(date, "%02X %02X %02X %02X %02X", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4));
-         ESP_LOGD(TAG, "Обрабатываемый набор: %s", date);
-         ESP_LOGD(TAG, "Результат: %d, %f", reverse32((uint32_t) metric->value), (float) reverse32((uint32_t) metric->value) / 1000);
+     } else {
+       snprintf(date, sizeof(date), "%02d.%02d.%d", 
+         (&present_date->str)[3], (&present_date->str)[2], 
+         (uint16_t)((&present_date->str)[0] << 8) + (&present_date->str)[1]
+       );
+     }    
+     ESP_LOGD(TAG, "Present date: %s", date);
+     ptr = (uint8_t*)&present_date->str + present_date->size;       
+     while (ptr < package->buff + sizeof(package->buff) && (metric = (type_digit_t*) ptr)) {
+       switch (metric->type) {
+         case TYPE_UNSIGNED_32:
+         case TYPE_SIGNED_32:
+           sprintf(date, "%02X %02X %02X %02X %02X", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4));
+           ESP_LOGD(TAG, "Обрабатываемый набор: %s", date);
+           ESP_LOGD(TAG, "Результат: %d, %f", reverse32((uint32_t) metric->value), (float) reverse32((uint32_t) metric->value) / 1000);
+  
+           ptr += 4;
+           break;
+         case TYPE_UNSIGNED_LONG:
+         case TYPE_SIGNED_LONG:
+           sprintf(date, "%02X %02X %02X", *ptr, *(ptr+1), *(ptr+2));
+           ESP_LOGD(TAG, "Обрабатываемый набор: %s", date);
+           ESP_LOGD(TAG, "Результат: %d, %f", reverse16((uint16_t) metric->value), (float) reverse16((uint16_t) metric->value) / 1000);
 
-         ptr += 4;
-         break;
-       case TYPE_UNSIGNED_LONG:
-       case TYPE_SIGNED_LONG:
-         sprintf(date, "%02X %02X %02X", *ptr, *(ptr+1), *(ptr+2));
-         ESP_LOGD(TAG, "Обрабатываемый набор: %s", date);
-         ESP_LOGD(TAG, "Результат: %d, %f", reverse16((uint16_t) metric->value), (float) reverse16((uint16_t) metric->value) / 1000);
-
-         ptr += 2;
-         break;
-       default: 
-         ptr++;
-     }
-   }  
-   return true;
+           ptr += 2;
+           break;
+         default: 
+           ptr++;
+       }
+     }  
+     return true;
 /*    
    type_digit_t *p_list = (type_digit_t*)((uint8_t*)&present_date->str + present_date->size);
     // tariffs energy
@@ -487,8 +487,8 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
       p_list += (i == 0 ? 3 : 2);
     }
     return true;
+*/
   }
-  */
   return false;
 }
 
