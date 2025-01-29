@@ -428,7 +428,7 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
   uint8_t *ptr = package->buff;
   type_octet_string_t *present_date = (type_octet_string_t*)ptr;
   type_digit_t *metric;
-  char date[32];
+  char date[64];
   if ((*ptr++ == LSAP) && (*ptr++ == RESP_LSAP) && *ptr++ == 0 && *ptr == GET_RESPONSE && (present_date = (type_octet_string_t*)(ptr + 8))->type == TYPE_OCTET_STRING && present_date->size > 0) {
     if (present_date->size == 12) {
       snprintf(date, sizeof(date), "%02d.%02d.%d, %02d:%02d:%02d", 
