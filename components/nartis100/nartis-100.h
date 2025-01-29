@@ -136,6 +136,7 @@ public:
   static uint8_t get_address(uint8_t *buff, uint8_t len, uint16_t *lower, uint16_t *upper);
   static uint8_t get_address_size(uint8_t *buff);
   static uint32_t reverse32(uint32_t in);
+  static uint16_t reverse16(uint16_t in);
 protected:
   size_t set_header(package_t *raw_package);
   int request_data(request_t *request, package_t *raw_package);
