@@ -450,7 +450,7 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
        case TYPE_SIGNED_32:
          sprintf(date, "%02X %02X %02X %02X %02X", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4));
          ESP_LOGD(TAG, "Обрабатываемый набор: %s", date);
-         ESP_LOGD(TAG, "Результат: %d, %f", reverse32((uint32_t) metric->value)), (float) reverse32((uint32_t) metric->value) / 1000);
+         ESP_LOGD(TAG, "Результат: %d, %f", reverse32((uint32_t) metric->value), (float) reverse32((uint32_t) metric->value) / 1000);
 
          ptr += 4;
          break;
@@ -458,7 +458,7 @@ bool CommandGetListData::process_result(header_t *header, result_package_t *pack
        case TYPE_SIGNED_LONG:
          sprintf(date, "%02X %02X %02X", *ptr, *(ptr+1), *(ptr+2));
          ESP_LOGD(TAG, "Обрабатываемый набор: %s", date);
-         ESP_LOGD(TAG, "Результат: %d, %f", reverse16((uint16_t) metric->value)), (float) reverse16((uint16_t) metric->value) / 1000);
+         ESP_LOGD(TAG, "Результат: %d, %f", reverse16((uint16_t) metric->value), (float) reverse16((uint16_t) metric->value) / 1000);
 
          ptr += 2;
          break;
